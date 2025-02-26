@@ -1,17 +1,17 @@
 ---
 # Display name
-title: 吳健雄
+title: Hailong Jiang
 
 # Name pronunciation (optional)
-name_pronunciation: Chien Shiung Wu
+name_pronunciation: [ Hi-lung Jyang ]
 
 # Full name (for SEO)
-first_name: Shiung Wu
-last_name: Chien
+first_name: Hailong
+last_name: Jiang
 
 # Status emoji
 status:
-  icon: ☕️
+  icon: 🎓
 
 # Is this the primary user of the site?
 superuser: true
@@ -20,42 +20,42 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: Chief Scientist
+role: Ph.D. Candidate
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
-  - name: OpenAI
-    url: https://openai.com/
+  - name: Kent State University
+    url: https://www.kent.edu/
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
   - icon: at-symbol
-    url: 'mailto:your-email@example.com'
+    url: 'mailto:hjiang13@kent.edu'
     label: E-mail Me
   - icon: brands/x
     url: https://twitter.com/GetResearchDev
   - icon: brands/instagram
     url: https://www.instagram.com/
   - icon: brands/github
-    url: https://github.com/gcushen
+    url: https://github.com/hjiang13
   - icon: brands/linkedin
-    url: https://www.linkedin.com/
+    url: https://www.linkedin.com/in/hailong-jiang-328b1a1b5/
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/
+    url: https://scholar.google.com/citations?user=-8qm9_MAAAAJ&hl=en
   - icon: academicons/orcid
-    url: https://orcid.org/
+    url: https://orcid.org/my-orcid?orcid=0000-0003-3246-7177
 
 interests:
-  - Artificial Intelligence
-  - Computational Linguistics
-  - Information Retrieval
+  - High-performance Computing
+  - Artificial Intelligence 
+  - Programming Language
 
 education:
-  - area: PhD Artificial Intelligence
-    institution: Stanford University
-    date_start: 2016-01-01
-    date_end: 2020-12-31
+  - area: PhD in Computer Science
+    institution: Kent State University
+    date_start: 2018-08-01
+    date_end: 2025-05-01
     summary: |
       Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
     button:
@@ -183,4 +183,4 @@ awards:
 
 ## About Me
 
-Chien Shiung Wu is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+Hailong Jiang is a passionate Ph.D. candidate in Computer Science with extensive experience in High-Performance Computing (HPC) resilience analysis and innovative code intelligence on LLM techniques. Proven track record in developing cutting-edge tools, teaching, and conducting collaborative research. Seeking a research role in HPC applications and systems, compilers, or generative AI systems starting May 2025.
