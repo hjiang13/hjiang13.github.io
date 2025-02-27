@@ -57,82 +57,84 @@ education:
     date_start: 2018-08-01
     date_end: 2025-05-01
     summary: |
-      Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
+      Thesis on _Research on resilience in high-performance Computing (HPC) applications with Large Language Models_. Supervised by [Prof Qiang Guan](https://www.kent.edu/cs/qiang-guan). Presented papers at 3 IEEE conferences with the contributions being published in 2 Springer journals.
     button:
       text: 'Read Thesis'
       url: 'https://example.com'
-  - area: MEng Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    date_start: 2016-01-01
-    date_end: 2020-12-31
+  - area: MEng in IC Engineering
+    institution: University of Chinese Academy of Science, Beijing, China
+    date_start: 2014-08-01
+    date_end: 2017-05-31
     summary: |
-      GPA: 3.8/4.0
-
-      Courses included:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - area: BSc Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    date_start: 2016-01-01
-    date_end: 2020-12-31
+      Thesis on _The Study of Cu2ZnSnS4 films generation by sulfur-free annealing process and device application_.
+  - area: BSc in Electronic Science and Technology
+    institution: Xidian University, Xi’an, China
+    date_start: 2010-09-01
+    date_end: 2014-08-01
     summary: |
-      GPA: 3.4/4.0
-      
-      Courses included:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+      Thesis on _A novel infrared object tracking algorithm._
 work:
-  - position: Director of Cloud Infrastructure
-    company_name: GenCoin
-    company_url: ''
-    company_logo: ''
-    date_start: 2021-01-01
+  - position: Research Assitant
+    company_name: Kent State University
+    company_url: 'https://www.guans.cs.kent.edu/'
+    company_logo: 'KSU_logo.png'
+    date_start: 2018-08-01
     date_end: ''
     summary: |2-
+      Program resilience analysis on High-performance computing (HPC) systems.
       Responsibilities include:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - position: Backend Software Engineer
-    company_name: X
-    company_url: ''
+      - Built a soft error simulation platform on LLVM
+      - Developed a resilience analysis platform with transformer/LLM
+      - Improved the resilience prediction accuracy by 30%
+      - Built a visualization framework to study error propagation using the control-flow graph
+  - position: Research Aide Technical
+    company_name: Argonne National Lab
+    company_url: 'https://www.anl.gov/'
     company_logo: ''
-    date_start: 2016-01-01
-    date_end: 2020-12-31
+    date_start: 2023-02-01
+    date_end: 2023-08-31
+    summary: |
+      Research topic: translation between parallelization languages:
+      - Complete the metadata process in the project “EXCELLENT” which translates parallelization language to each other in the compilation,
+      - Engineering in a combination of Noelle and SPLENDID
+      - Setup experiment environment for OpenMP/CUDA decompilation
+  - position: Summer Internship
+    company_name: Los Almos National Lab
+    company_url: 'https://www.lanl.gov/'
+    company_logo: ''
+    date_start: 2023-02-01
+    date_end: 2023-08-31
     summary: |
       Responsibilities include:
-      - Migrated infrastructure to a new data center
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+      - Developed FI-VIS tool based on Pin and Pinfi
+      - Trace and visualize error propagation in program execution at the instruction level.
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
 skills:
   - name: Technical Skills
     items:
-      - name: Python
-        description: ''
+      - name: Programming
+        description: 'C++/C, Python, Shell/Cmake'
         percent: 80
         icon: code-bracket
-      - name: Data Science
-        description: ''
+      - name: Tools and Techs
+        description: 'LLVM/Clang, CUDA/OpenMP, pytorch/TensorFlow, GNN, LLM/BERT'
         percent: 100
         icon: chart-bar
-      - name: SQL
-        description: ''
+      - name: Research Aid
+        description: 'Git, Latex, VS studio'
         percent: 40
         icon: circle-stack
   - name: Hobbies
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Hiking
+      - name: Marathon
         description: ''
         percent: 60
         icon: person-simple-walk
-      - name: Cats
+      - name: Badminton/Basketball
         description: ''
         percent: 100
         icon: cat
@@ -145,40 +147,21 @@ languages:
   - name: English
     percent: 100
   - name: Chinese
-    percent: 75
-  - name: Portuguese
-    percent: 25
+    percent: 100
 
 # Awards.
 #   Add/remove as many awards below as you like.
 #   Only `title`, `awarder`, and `date` are required.
 #   Begin multi-line `summary` with YAML's `|` or `|2-` multi-line prefix and indent 2 spaces below.
 awards:
-  - title: Neural Networks and Deep Learning
-    url: https://www.coursera.org/learn/neural-networks-deep-learning
-    date: '2023-11-25'
-    awarder: Coursera
-    icon: coursera
-    summary: |
-      I studied the foundational concept of neural networks and deep learning. By the end, I was familiar with the significant technological trends driving the rise of deep learning; build, train, and apply fully connected deep neural networks; implement efficient (vectorized) neural networks; identify key parameters in a neural network’s architecture; and apply deep learning to your own applications.
-  - title: Blockchain Fundamentals
-    url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
-    date: '2023-07-01'
-    awarder: edX
-    icon: edx
-    summary: |
-      Learned:
-      - Synthesize your own blockchain solutions
-      - Gain an in-depth understanding of the specific mechanics of Bitcoin
-      - Understand Bitcoin’s real-life applications and learn how to attack and destroy Bitcoin, Ethereum, smart contracts and Dapps, and alternatives to Bitcoin’s Proof-of-Work consensus algorithm
-  - title: 'Object-Oriented Programming in R'
-    url: https://www.datacamp.com/courses/object-oriented-programming-with-s3-and-r6-in-r
-    certificate_url: https://www.datacamp.com
-    date: '2023-01-21'
-    awarder: datacamp
-    icon: datacamp
-    summary: |
-      Object-oriented programming (OOP) lets you specify relationships between functions and the objects that they can act on, helping you manage complexity in your code. This is an intermediate level course, providing an introduction to OOP, using the S3 and R6 systems. S3 is a great day-to-day R programming tool that simplifies some of the functions that you write. R6 is especially useful for industry-specific analyses, working with web APIs, and building GUIs.
+  - title: Graduate Student Travel Awards 
+    url: https://www-s3-live.kent.edu/s3fs-root/s3fs-public/International%20Travel%20Award%20Guidelines.pdf
+    date: '2024-11-25'
+    awarder: Kent State University
+    #icon: coursera
+    #summary: |
+    #  I studied the foundational concept of neural networks and deep learning. By the end, I was familiar with the significant technological trends driving the rise of deep learning; build, train, and apply fully connected deep neural networks; implement efficient (vectorized) neural networks; identify key parameters in a neural network’s architecture; and apply deep learning to your own applications.
+  
 ---
 
 ## About Me

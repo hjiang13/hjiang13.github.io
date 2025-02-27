@@ -1,24 +1,24 @@
 ---
-title: Example Talk
+title: Doctoral Showcase in SC'24
 
-event: Hugo Blox Builder Conference
-event_url: https://example.org
+event: The International Conference for High Performance Computing, Networking, Storage, and Analysis • 17–22 Nov 2024 • Atlanta, GA.
+event_url: https://sc24.supercomputing.org/
 
-location: Hugo Blox Builder HQ
+location: Atlanta, GA.
 address:
-  street: 450 Serra Mall
-  city: Stanford
-  region: CA
-  postcode: '94305'
+  street: 
+  city: 
+  region: 
+  postcode:
   country: United States
 
-summary: An example talk using Hugo Blox Builder's Markdown slides feature.
-abstract: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellusac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam.'
+summary: The Doctoral Showcase provides an important opportunity for students near the end of their PhD to present a summary of their dissertation research in the form of short talks and poster presentations. 
+abstract: This doctoral showcase highlights three pivotal works conducted during my PhD that collectively advance the field of high-performance computing (HPC) resilience analysis using large language models (LLMs). The first work introduces HAPPA, a modular platform for HPC Application Resilience Analysis. HAPPA integrates LLMs to understand long code sequences, employing innovative code representation techniques to predict resilience accurately. Through the DARE dataset, HAPPA demonstrates superior predictive accuracy over existing models, achieving a mean squared error (MSE) of 0.078 in Silent Data Corruption (SDC) prediction, significantly outperforming the PARIS model.  Building on this foundation, the second work investigates the resilience of loops in HPC programs through a semantic approach. By analyzing the computational patterns known as the 13 dwarfs of parallelism, this study quantifies the SDC rates for each pattern. Utilizing LLMs with prompt engineering, the research identifies loop semantics, providing insights into which loops are more error-prone and enhancing the development of resilient HPC applications. Expanding the scope further, the third work evaluates the capabilities of LLMs in comprehending the syntax and semantics of Intermediate Representation (IR) code. The study conducts a comprehensive analysis using models like GPT-4o, GPT-3.5, and CodeLlama. By performing tasks such as decompiling IR code, generating CFGs, and simulating IR code execution, the research provides insights into the effectiveness of LLMs in handling low-level code analysis and their potential applications in program analysis. These studies collectively demonstrate the potential of LLMs in enhancing the resilience of HPC applications through innovative analysis techniques and predictive modeling.
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: '2030-06-01T13:00:00Z'
-date_end: '2030-06-01T15:00:00Z'
+date: '2024-09-21T13:00:00Z'
+date_end: '2024-09-21T15:00:00Z'
 all_day: false
 
 # Schedule page publish date (NOT talk date).
@@ -33,18 +33,18 @@ tags: []
 featured: false
 
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
+  caption: 'Presentation of poster at SC 2024'
   focal_point: Right
 
 #links:
-#  - icon: twitter
-#    icon_pack: fab
-#    name: Follow
-#    url: https://twitter.com/georgecushen
-url_code: 'https://github.com'
-url_pdf: ''
-url_slides: 'https://slideshare.net'
-url_video: 'https://youtube.com'
+  #icon: twitter
+  #icon_pack: fab
+#  name: Event
+#  url: https://sc24.supercomputing.org/proceedings/doctoral_showcase/doc_showcase_pages/drs104.html
+url_code: ''
+url_pdf: 'https://sc24.supercomputing.org/proceedings/doctoral_showcase/doc_files/drs104s2-file7.pdf'
+url_slides: ''
+url_video: ''
 
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
@@ -61,15 +61,3 @@ slides: ""
 projects:
   - example
 ---
-
-{{% callout note %}}
-Click on the **Slides** button above to view the built-in slides feature.
-{{% /callout %}}
-
-Slides can be added in a few ways:
-
-- **Create** slides using Hugo Blox Builder's [_Slides_](https://docs.hugoblox.com/reference/content-types/) feature and link using `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://docs.hugoblox.com/reference/markdown/).
-
-Further event details, including [page elements](https://docs.hugoblox.com/reference/markdown/) such as image galleries, can be added to the body of this page.

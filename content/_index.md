@@ -35,9 +35,11 @@ sections:
       title: '📚 My Research'
       subtitle: ''
       text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+        My research centers on pushing the boundaries of High-Performance Computing (HPC) and Artificial Intelligence (AI) to tackle some of the most challenging problems in large-scale data processing and complex system optimization. 
 
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
+        Beyond optimization, my research also embraces the generative side of AI, delving into novel methods for creating, refining, and applying language models across varied domains. I’m particularly interested in how large-scale models can be adapted or fine-tuned for specialized tasks—ranging from scientific computing to creative content generation—while remaining computationally feasible. 
+        
+        Ultimately, my aim is to develop robust, forward-thinking solutions at the intersection of HPC, AI, language model optimization, and generation, advancing both the theory and the practical impact of these technologies.
         
         Please reach out to collaborate 😃
     design:
