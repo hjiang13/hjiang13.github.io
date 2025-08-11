@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 <section class="home-section" markdown="1">
-## 👋 Introduction
+## 👋 Hello, World!
 
 I am **Hailong Jiang**, a Computer Science Ph.D. with expertise in HPC systems, compiler technologies, and the intersection of program analysis and large language models (LLMs). I have a proven track record in building innovative tools, publishing impactful research, and leading collaborative projects. **I am currently a Tenure Track Assistant Professor in Computer Science at Youngstown State University (YSU).**
 
