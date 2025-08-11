@@ -1,0 +1,65 @@
+- date: "2025-01-01"
+  content: "🎉 MAJOR ACHIEVEMENT: Our paper 'Can Large Language Models Understand IRs?' has been ACCEPTED to ICML 2025! This represents a significant breakthrough in my research career at the intersection of LLMs and compiler technologies."
+  type: "publication"
+  link: "https://icml.cc/2025/"
+
+- date: "2024-12-15"
+  content: "Successfully defended my PhD dissertation on HPC resilience analysis with LLMs."
+  type: "achievement"
+
+- date: "2024-11-20"
+  content: "HAPPA platform paper published in SRDS'24 - International Symposium on Reliable Distributed Systems."
+  type: "publication"
+  link: "https://ieeexplore.ieee.org/abstract/document/10806619"
+
+- date: "2024-11-15"
+  content: "Presented PhD research at SC'24 Doctoral Showcase in Atlanta, GA."
+  type: "presentation"
+  link: "https://sc24.supercomputing.org/proceedings/doctoral_showcase/doc_files/drs104s2-file7.pdf"
+
+- date: "2024-10-01"
+  content: "Accepted Tenure Track Assistant Professor position at Youngstown State University starting August 2025."
+  type: "career"
+
+- date: "2024-09-15"
+  content: "LLM IR understanding research paper submitted to ICML 2025."
+  type: "research"
+
+- date: "2024-08-01"
+  content: "Presented PhD research at SC'24 Doctoral Showcase - The International Conference for High Performance Computing, Networking, Storage, and Analysis in Atlanta, GA."
+  type: "achievement"
+  link: "https://sc24.supercomputing.org/proceedings/doctoral_showcase/doc_files/drs104s2-file7.pdf"
+
+- date: "2024-07-15"
+  content: "Finished research collaboration at Argonne National Laboratory."
+  type: "experience" 
+
+- date: "2024-07-01"
+  content: "HPC Loop Resilience Analysis paper accepted to HPEC'24 - IEEE High Performance Extreme Computing Conference."
+  type: "publication"
+  link: "https://ieeexplore.ieee.org/abstract/document/10403395"
+
+- date: "2024-06-01"
+  content: "Completed research internship at Los Alamos National Laboratory, developing FI-VIS tool for error propagation visualization."
+  type: "experience"
+
+- date: "2024-05-01"
+  content: "Research collaboration with Argonne National Laboratory on translation between parallelization languages."
+  type: "research"
+
+- date: "2024-04-01"
+  content: "VISILIENCE visualization framework paper published in PRDC'23 - IEEE Pacific Rim International Symposium on Dependable Computing."
+  type: "publication"
+  link: "https://ieeexplore.ieee.org/abstract/document/10259184"
+
+- date: "2024-03-01"
+  content: "Developed comprehensive LLM IR understanding research framework, evaluating GPT-4, GPT-3, Gemma 2, LLaMA 3.1, and Code Llama capabilities."
+  type: "research"
+
+- date: "2024-02-01"
+  content: "Enhanced HAPPA platform with transformer/LLM integration, achieving 30% improvement in resilience prediction accuracy."
+  type: "research"
+
+- date: "2024-01-01"
+  content: "Started exploring applications of Large Language Models in healthcare AI and medical data analysis."
+  type: "research" 

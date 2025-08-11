@@ -1,20 +1,19 @@
 ---
-title: "Teaching experience 2"
+title: "Introduction to Machine Learning"
 collection: teaching
-type: "Workshop"
-permalink: /teaching/2015-spring-teaching-1
-venue: "University 1, Department"
-date: 2015-01-01
-location: "City, Country"
+type: "Graduate Course"
+permalink: /teaching/2015-spring-teaching-2
+venue: "Computer Science Department"
+semester: "Spring 2015"
+location: "University Campus"
 ---
 
-This is a description of a teaching experience. You can use markdown like any other post.
+This course provides a comprehensive introduction to machine learning algorithms and their applications. Topics covered include:
 
-Heading 1
-======
+- Supervised learning (classification and regression)
+- Unsupervised learning (clustering and dimensionality reduction)
+- Neural networks and deep learning
+- Model evaluation and validation
+- Practical applications in various domains
 
-Heading 2
-======
-
-Heading 3
-======
+Students gain hands-on experience through programming assignments and a final project.

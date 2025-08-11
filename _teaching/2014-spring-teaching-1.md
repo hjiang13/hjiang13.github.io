@@ -1,20 +1,19 @@
 ---
-title: "Teaching experience 1"
+title: "Data Structures and Algorithms"
 collection: teaching
-type: "Undergraduate course"
+type: "Undergraduate Course"
 permalink: /teaching/2014-spring-teaching-1
-venue: "University 1, Department"
-date: 2014-01-01
-location: "City, Country"
+venue: "Computer Science Department"
+semester: "Spring 2014"
+location: "University Campus"
 ---
 
-This is a description of a teaching experience. You can use markdown like any other post.
+This course covers fundamental data structures and algorithms essential for computer science students. The curriculum includes:
 
-Heading 1
-======
+- Arrays, linked lists, stacks, and queues
+- Trees and graphs
+- Sorting and searching algorithms
+- Algorithm analysis and complexity
+- Problem-solving strategies
 
-Heading 2
-======
-
-Heading 3
-======
+Students implement these concepts in programming assignments and participate in algorithm competitions.

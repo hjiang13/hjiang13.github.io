@@ -1,18 +1,19 @@
 # Authors
 
-Name Name:
-  name        : "Name Name"
-  uri         : "http://name.com"
-  email       : "name@name.com"
-  bio         : "This is the first name."
-  avatar      : "bio-photo-2.jpg"
-  twitter     : "name"
-  google_plus : "Name"
-
-Name2 Name2:
-  name        : "Name2 Name2"
-  email       : "name2@name2.com"
-  bio         : "I ordered what?"
-  avatar      : "bio-photo.jpg"
-  twitter     : "name2"
-  google_plus : "Name"
+Hailong Jiang:
+  name        : "Hailong Jiang"
+  uri         : "https://hjiang13.github.io"
+  email       : "hjiang@ysu.edu"
+  bio         : "Tenure Track Assistant Professor in Computer Science at Youngstown State University. Research focuses on HPC systems, compiler technologies, and the intersection of program analysis and large language models (LLMs)."
+  avatar      : "profile.jpg"
+  twitter     : "GetResearchDev"
+  google_plus : # "your_google_plus"
+  github      : "hjiang13"
+  linkedin    : "hailong-jiang-328b1a1b5"
+  googlescholar: "https://scholar.google.com/citations?user=-8qm9_MAAAAJ&hl=en"
+  orcid       : "https://orcid.org/my-orcid?orcid=0000-0003-3246-7177"
+  location    : "Youngstown, OH, USA"
+  employer    : "Youngstown State University"
+  phone       : "937-789-3969"
+  address     : "Youngstown, OH, USA"
+  alt_email   : "jianghl106@gmail.com"

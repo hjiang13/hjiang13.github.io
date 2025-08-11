@@ -1,0 +1,925 @@
+/* Section layout enhancements */
+.home-section {
+  margin: 1.75rem 0 2rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background: var(--home-section-bg, #ffffff);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+/* Subtle divider between sections */
+.section-divider {
+  height: 1px;
+  margin: 1.25rem 0 1.75rem;
+  background: linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.12), rgba(0,0,0,0));
+  opacity: 0.5;
+}
+
+/* Headings inside cards - match news title style */
+.home-section h2 {
+  margin: 0 0 1rem 0;
+  color: var(--primary-color, #2c3e50);
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary-color, #2c3e50);
+  padding-bottom: 0.5rem;
+}
+
+.home-section h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color, #2c3e50);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* News embed spacing fix */
+.news-section {
+  margin-top: 0.5rem;
+}
+
+/* Light/Dark theme tokens */
+:root {
+  --home-section-bg: #ffffff;
+  --border-color: #e5e7eb;
+  --primary-color: #2c3e50;
+}
+
+[data-theme="dark"] :root,
+html[data-theme="dark"] {
+  --home-section-bg: #101317;
+  --border-color: #1f2937;
+  --primary-color: #60a5fa;
+}
+
+/* Compact lists inside cards */
+.home-section ul {
+  margin: 0.25rem 0 0.5rem;
+}
+
+/* Link emphasis inside cards */
+.home-section a { text-decoration: none; }
+.home-section a:hover { text-decoration: underline; }
+
+/* Emoji styling in headings */
+.home-section h2::before,
+.home-section h3::before {
+  margin-right: 0.5rem;
+}
+
+/* ===== PROJECTS PAGE STYLES ===== */
+
+/* Projects page container */
+.projects-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Main title styling */
+.projects-page h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color, #2c3e50);
+  text-align: center;
+  margin-bottom: 3rem;
+  border-bottom: 3px solid var(--primary-color, #2c3e50);
+  padding-bottom: 1rem;
+}
+
+/* Section headers */
+.projects-page h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-color, #2c3e50);
+  margin: 3rem 0 2rem 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color, #2c3e50) 0%, rgba(44, 62, 80, 0.8) 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Project cards */
+.project-card {
+  background: var(--home-section-bg, #ffffff);
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c, #f39c12);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  border-color: var(--primary-color, #2c3e50);
+}
+
+/* Project titles */
+.project-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary-color, #2c3e50);
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color, #e5e7eb);
+}
+
+/* Project status badges */
+.project-status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.status-active {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+}
+
+.status-published {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.status-research {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  color: white;
+}
+
+.status-development {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+/* Project content */
+.project-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+/* Project features */
+.project-features {
+  background: rgba(52, 152, 219, 0.05);
+  border-left: 4px solid #3498db;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.project-features h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 0.75rem 0;
+}
+
+.project-features ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.project-features li {
+  margin: 0.5rem 0;
+  color: #4a5568;
+}
+
+/* Project metadata */
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(236, 240, 241, 0.5);
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #5a6c7d;
+}
+
+.meta-item strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Project links */
+.project-links {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.project-links a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  background: linear-gradient(135deg, var(--primary-color, #2c3e50), #34495e);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.project-links a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #34495e, var(--primary-color, #2c3e50));
+}
+
+/* Collaboration section */
+.collaboration-section {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.collaboration-section h2 {
+  background: none;
+  color: var(--primary-color, #2c3e50);
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.collaboration-opportunities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.opportunity-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.opportunity-card:hover {
+  transform: translateY(-3px);
+}
+
+.opportunity-card h4 {
+  color: var(--primary-color, #2c3e50);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.opportunity-card ul {
+  text-align: left;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.opportunity-card li {
+  margin: 0.5rem 0;
+  color: #4a5568;
+}
+
+/* Footer quote */
+.projects-footer {
+  text-align: center;
+  font-style: italic;
+  color: #7f8c8d;
+  margin: 3rem 0 1rem 0;
+  padding: 2rem;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .projects-page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .projects-page h1 {
+    font-size: 2rem;
+  }
+  
+  .project-card {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .project-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .collaboration-opportunities {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .project-card,
+html[data-theme="dark"] .project-card {
+  background: var(--home-section-bg, #101317);
+  border-color: var(--border-color, #1f2937);
+}
+
+[data-theme="dark"] .project-features,
+html[data-theme="dark"] .project-features {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+[data-theme="dark"] .project-meta,
+html[data-theme="dark"] .project-meta {
+  background: rgba(31, 41, 55, 0.5);
+}
+
+[data-theme="dark"] .collaboration-section,
+html[data-theme="dark"] .collaboration-section {
+  background: linear-gradient(135deg, #1f2937, #111827);
+}
+
+[data-theme="dark"] .opportunity-card,
+html[data-theme="dark"] .opportunity-card {
+  background: var(--home-section-bg, #101317);
+  border-color: var(--border-color, #1f2937);
+}
+
+/* ===== KARKARE-STYLE COURSE PAGE STYLES ===== */
+
+/* Remove left sidebar for course pages - comprehensive hiding */
+.course-page .author__avatar,
+.course-page .author__content,
+.course-page .author__urls,
+.course-page .sidebar,
+.course-page .author__bio,
+.course-page .author__name,
+.course-page .author__location,
+.course-page .author__employer,
+.course-page .author__urls-wrapper,
+.course-page .author__urls-wrapper li,
+.course-page .author__urls-wrapper a,
+.course-page .author__urls-wrapper .label,
+.course-page .author__urls-wrapper .icon,
+.course-page .author__urls-wrapper .username,
+.course-page .author__urls-wrapper .url,
+.course-page .author__urls-wrapper .email,
+.course-page .author__urls-wrapper .github,
+.course-page .author__urls-wrapper .linkedin,
+.course-page .author__urls-wrapper .twitter,
+.course-page .author__urls-wrapper .orcid,
+.course-page .author__urls-wrapper .scholar,
+.course-page .author__urls-wrapper .website,
+.course-page .author__urls-wrapper .cv,
+.course-page .author__urls-wrapper .resume,
+.course-page .author__urls-wrapper .pdf,
+.course-page .author__urls-wrapper .doc,
+.course-page .author__urls-wrapper .docx,
+.course-page .author__urls-wrapper .txt,
+.course-page .author__urls-wrapper .rtf,
+.course-page .author__urls-wrapper .odt,
+.course-page .author__urls-wrapper .pages,
+.course-page .author__urls-wrapper .key,
+.course-page .author__urls-wrapper .numbers,
+.course-page .author__urls-wrapper .ppt,
+.course-page .author__urls-wrapper .pptx,
+.course-page .author__urls-wrapper .odp,
+.course-page .author__urls-wrapper .keynote,
+.course-page .author__urls-wrapper .xls,
+.course-page .author__urls-wrapper .xlsx,
+.course-page .author__urls-wrapper .ods,
+.course-page .author__urls-wrapper .csv,
+.course-page .author__urls-wrapper .tsv,
+.course-page .author__urls-wrapper .json,
+.course-page .author__urls-wrapper .xml,
+.course-page .author__urls-wrapper .yaml,
+.course-page .author__urls-wrapper .yml,
+.course-page .author__urls-wrapper .toml,
+.course-page .author__urls-wrapper .ini,
+.course-page .author__urls-wrapper .cfg,
+.course-page .author__urls-wrapper .conf,
+.course-page .author__urls-wrapper .config,
+.course-page .author__urls-wrapper .env,
+.course-page .author__urls-wrapper .properties,
+.course-page .author__urls-wrapper .prop,
+.course-page .author__urls-wrapper .settings,
+.course-page .author__urls-wrapper .prefs,
+.course-page .author__urls-wrapper .ini,
+.course-page .author__urls-wrapper .reg,
+.course-page .author__urls-wrapper .plist,
+.course-page .author__urls-wrapper .xml,
+.course-page .author__urls-wrapper .json,
+.course-page .author__urls-wrapper .yaml,
+.course-page .author__urls-wrapper .yml,
+.course-page .author__urls-wrapper .toml,
+.course-page .author__urls-wrapper .ini,
+.course-page .author__urls-wrapper .cfg,
+.course-page .author__urls-wrapper .conf,
+.course-page .author__urls-wrapper .config,
+.course-page .author__urls-wrapper .env,
+.course-page .author__urls-wrapper .properties,
+.course-page .author__urls-wrapper .prop,
+.course-page .author__urls-wrapper .settings,
+.course-page .author__urls-wrapper .prefs,
+.course-page .author__urls-wrapper .ini,
+.course-page .author__urls-wrapper .reg,
+.course-page .author__urls-wrapper .plist {
+  display: none !important;
+}
+
+/* Ensure page content takes full width */
+.course-page .page__content,
+.course-page .page__inner-wrap,
+.course-page .page__content .page__inner-wrap {
+  margin-left: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+/* Hide any remaining sidebar elements */
+.course-page .sidebar,
+.course-page .sidebar__right,
+.course-page .sidebar__left,
+.course-page .sidebar__top,
+.course-page .sidebar__bottom,
+.course-page .sidebar__inner,
+.course-page .sidebar__inner-wrap,
+.course-page .sidebar__inner-content,
+.course-page .sidebar__inner-content-wrap,
+.course-page .sidebar__inner-content-inner,
+.course-page .sidebar__inner-content-inner-wrap {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Course page container - full width like Karkare */
+.course-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Course header - simple and clean like Karkare */
+.course-header {
+  text-align: left;
+  margin-bottom: 3rem;
+  padding: 0;
+  background: none;
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 1rem;
+}
+
+.course-header h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.course-header .course-meta {
+  font-size: 1rem;
+  color: #666;
+  font-weight: normal;
+}
+
+/* Course sections - clean and minimal */
+.course-section {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 2rem 0;
+  box-shadow: none;
+}
+
+.course-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 2rem 0 1rem 0;
+  padding: 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+  background: none;
+}
+
+.course-section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+/* Simple tables like Karkare */
+.schedule-table,
+.important-dates {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.schedule-table th,
+.schedule-table td,
+.important-dates th,
+.important-dates td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.schedule-table th,
+.important-dates th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.schedule-table tr:hover,
+.important-dates tr:hover {
+  background: #f8f9fa;
+}
+
+/* Simple download links like Karkare */
+.download-links {
+  display: block;
+  margin: 1rem 0;
+}
+
+.download-link {
+  display: block;
+  padding: 0.5rem 0;
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #0066cc;
+  transition: color 0.2s ease;
+}
+
+.download-link:hover {
+  color: #004499;
+  background: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.download-link .icon {
+  font-size: 1rem;
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+/* Simple lists */
+.course-section ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.course-section li {
+  margin: 0.25rem 0;
+  color: #333;
+}
+
+/* FAQ items - simple styling */
+.faq-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border-left: 3px solid #0066cc;
+}
+
+.faq-item strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Quick links - simple buttons */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.quick-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #0066cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.quick-link:hover {
+  background: #004499;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive design for course pages */
+@media (max-width: 768px) {
+  .course-page {
+    padding: 1rem;
+  }
+  
+  .course-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .schedule-table,
+  .important-dates {
+    font-size: 0.8rem;
+  }
+  
+  .schedule-table th,
+  .schedule-table td,
+  .important-dates th,
+  .important-dates td {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .quick-links {
+    flex-direction: column;
+  }
+}
+
+/* Dark theme adjustments for course pages */
+[data-theme="dark"] .course-section,
+html[data-theme="dark"] .course-section {
+  background: none;
+  border-color: transparent;
+}
+
+[data-theme="dark"] .download-link,
+html[data-theme="dark"] .download-link {
+  background: none;
+  border-color: transparent;
+}
+
+[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .faq-item {
+  background: rgba(31, 41, 55, 0.5);
+}
+
+/* ===== INDIVIDUAL COURSE PAGE SIDEBAR HIDING ===== */
+
+/* Force hide all author-related elements on individual course pages only */
+body.page--teaching-cs101 .author__avatar,
+body.page--teaching-cs101 .author__content,
+body.page--teaching-cs101 .author__urls,
+body.page--teaching-cs101 .sidebar,
+body.page--teaching-cs101 .author__bio,
+body.page--teaching-cs101 .author__name,
+body.page--teaching-cs101 .author__location,
+body.page--teaching-cs101 .author__employer,
+body.page--teaching-cs101 .author__urls-wrapper,
+body.page--teaching-cs101 .author__urls-wrapper li,
+body.page--teaching-cs101 .author__urls-wrapper a,
+body.page--teaching-cs101 .author__urls-wrapper .label,
+body.page--teaching-cs101 .author__urls-wrapper .icon,
+body.page--teaching-cs101 .author__urls-wrapper .username,
+body.page--teaching-cs101 .author__urls-wrapper .url,
+body.page--teaching-cs101 .author__urls-wrapper .email,
+body.page--teaching-cs101 .author__urls-wrapper .github,
+body.page--teaching-cs101 .author__urls-wrapper .linkedin,
+body.page--teaching-cs101 .author__urls-wrapper .twitter,
+body.page--teaching-cs101 .author__urls-wrapper .orcid,
+body.page--teaching-cs101 .author__urls-wrapper .scholar,
+body.page--teaching-cs101 .author__urls-wrapper .website,
+body.page--teaching-cs101 .author__urls-wrapper .cv,
+body.page--teaching-cs101 .author__urls-wrapper .resume,
+body.page--teaching-cs101 .author__urls-wrapper .pdf,
+body.page--teaching-cs101 .author__urls-wrapper .doc,
+body.page--teaching-cs101 .author__urls-wrapper .docx,
+body.page--teaching-cs101 .author__urls-wrapper .txt,
+body.page--teaching-cs101 .author__urls-wrapper .rtf,
+body.page--teaching-cs101 .author__urls-wrapper .odt,
+body.page--teaching-cs101 .author__urls-wrapper .pages,
+body.page--teaching-cs101 .author__urls-wrapper .key,
+body.page--teaching-cs101 .author__urls-wrapper .numbers,
+body.page--teaching-cs101 .author__urls-wrapper .ppt,
+body.page--teaching-cs101 .author__urls-wrapper .pptx,
+body.page--teaching-cs101 .author__urls-wrapper .odp,
+body.page--teaching-cs101 .author__urls-wrapper .keynote,
+body.page--teaching-cs101 .author__urls-wrapper .xls,
+body.page--teaching-cs101 .author__urls-wrapper .xlsx,
+body.page--teaching-cs101 .author__urls-wrapper .ods,
+body.page--teaching-cs101 .author__urls-wrapper .csv,
+body.page--teaching-cs101 .author__urls-wrapper .tsv,
+body.page--teaching-cs101 .author__urls-wrapper .json,
+body.page--teaching-cs101 .author__urls-wrapper .xml,
+body.page--teaching-cs101 .author__urls-wrapper .yaml,
+body.page--teaching-cs101 .author__urls-wrapper .yml,
+body.page--teaching-cs101 .author__urls-wrapper .toml,
+body.page--teaching-cs101 .author__urls-wrapper .ini,
+body.page--teaching-cs101 .author__urls-wrapper .cfg,
+body.page--teaching-cs101 .author__urls-wrapper .conf,
+body.page--teaching-cs101 .author__urls-wrapper .config,
+body.page--teaching-cs101 .author__urls-wrapper .env,
+body.page--teaching-cs101 .author__urls-wrapper .properties,
+body.page--teaching-cs101 .author__urls-wrapper .prop,
+body.page--teaching-cs101 .author__urls-wrapper .settings,
+body.page--teaching-cs101 .author__urls-wrapper .prefs,
+body.page--teaching-cs101 .author__urls-wrapper .ini,
+body.page--teaching-cs101 .author__urls-wrapper .reg,
+body.page--teaching-cs101 .author__urls-wrapper .plist {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  z-index: -9999 !important;
+}
+
+/* Force page content to take full width on individual course pages */
+body.page--teaching-cs101 .page__content,
+body.page--teaching-cs101 .page__inner-wrap,
+body.page--teaching-cs101 .page__content .page__inner-wrap {
+  margin-left: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
+}
+
+/* Hide any remaining sidebar elements with maximum force on individual course pages */
+body.page--teaching-cs101 .sidebar,
+body.page--teaching-cs101 .sidebar__right,
+body.page--teaching-cs101 .sidebar__left,
+body.page--teaching-cs101 .sidebar__top,
+body.page--teaching-cs101 .sidebar__bottom,
+body.page--teaching-cs101 .sidebar__inner,
+body.page--teaching-cs101 .sidebar__inner-wrap,
+body.page--teaching-cs101 .sidebar__inner-content,
+body.page--teaching-cs101 .sidebar__inner-content-wrap,
+body.page--teaching-cs101 .sidebar__inner-content-inner,
+body.page--teaching-cs101 .sidebar__inner-content-inner-wrap {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  z-index: -9999 !important;
+}
+
+/* ===== ALTERNATIVE SELECTORS FOR COURSE PAGES ===== */
+
+/* Hide sidebar on pages with /teaching/ in URL but not the main teaching page */
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__avatar,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__content,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__bio,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__name,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__location,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__employer,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper li,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper a,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .label,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .icon,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .username,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .url,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .email,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .github,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .linkedin,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .twitter,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .orcid,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .scholar,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .website,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .cv,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .resume,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .pdf,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .doc,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .docx,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .txt,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .rtf,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .odt,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .pages,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .key,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .numbers,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .ppt,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .pptx,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .odp,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .keynote,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .xls,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .xlsx,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .ods,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .csv,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .tsv,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .json,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .xml,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .yaml,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .yml,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .toml,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .ini,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .cfg,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .conf,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .config,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .env,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .properties,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .prop,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .settings,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .prefs,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .ini,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .reg,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .author__urls-wrapper .plist {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  z-index: -9999 !important;
+}
+
+/* Force page content to take full width on course pages */
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .page__content,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .page__inner-wrap,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .page__content .page__inner-wrap {
+  margin-left: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
+}
+
+/* Hide any remaining sidebar elements on course pages */
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__right,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__left,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__top,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__bottom,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner-wrap,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner-content,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner-content-wrap,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner-content-inner,
+html[data-url*="/teaching/"]:not([data-url="/teaching/"]) .sidebar__inner-content-inner-wrap {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  z-index: -9999 !important;
+} 
