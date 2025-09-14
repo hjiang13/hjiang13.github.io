@@ -19,7 +19,8 @@ author_profile: true
 
 This course covers fundamental data structures and object-oriented programming concepts. Students will learn about arrays, linked lists, stacks, queues, trees, and graphs, along with their implementation using object-oriented principles.
 
-**[Download Syllabus (PDF)]({{ base_path }}/files/csis3700/csis3700-syllabus.pdf)**
+**[Download Syllabus (PDF)]({{ base_path }}/files/csis3700/csis3700-syllabus.pdf)**  
+**[Memory Lab Visualizer]({{ base_path }}/csis3700-memory-lab/)** - Interactive memory management visualization tool
 
 ---
 
