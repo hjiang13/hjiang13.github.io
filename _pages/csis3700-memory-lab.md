@@ -286,13 +286,13 @@ function useProgram(id){
 // ---------- UI components ----------
 function CodeView({lines, current}){
   return (
-    <div className="rounded-2xl border bg-white/90 shadow-sm overflow-hidden">
-      <div className="px-3 py-2 text-xs text-slate-600 border-b bg-slate-50">Code (execute one line at a time)</div>
-      <pre className="m-0 p-3 text-sm leading-6 font-mono whitespace-pre-wrap">
+    <div className="rounded-3xl border-2 border-slate-200 bg-white shadow-lg overflow-hidden">
+      <div className="px-4 py-3 text-sm font-bold text-slate-700 border-b-2 border-slate-200 bg-slate-50">Code (execute one line at a time)</div>
+      <pre className="m-0 p-4 text-base leading-7 font-mono whitespace-pre-wrap">
         {lines.map((ln,i)=> (
-          <div key={i} className={`flex gap-3 ${i===current? 'bg-yellow-100' : ''}`}>
-            <span className="w-8 text-right text-slate-400 select-none">{i+1}</span>
-            <span className="flex-1">{ln}</span>
+          <div key={i} className={`flex gap-4 py-1 px-2 rounded-lg ${i===current? 'bg-yellow-100 border-2 border-yellow-300' : 'hover:bg-slate-50'}`}>
+            <span className="w-10 text-right text-slate-500 select-none font-bold">{i+1}</span>
+            <span className="flex-1 text-slate-800">{ln}</span>
           </div>
         ))}
       </pre>
@@ -303,27 +303,27 @@ function CodeView({lines, current}){
 function StackView({stack}){
   const items = Object.entries(stack).sort((a,b)=>b[1].addr - a[1].addr);
   return (
-    <div className="space-y-2">
-      {items.length===0 && <div className="text-sm text-gray-500">(empty)</div>}
+    <div className="space-y-3">
+      {items.length===0 && <div className="text-base text-slate-500 text-center py-8 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-300">(empty)</div>}
       {items.map(([name,v])=>{
         const addr = toHex(v.addr);
         const isPtr = v.type==='pointer';
         const dangling = v.meta?.dangling;
         return (
-          <div key={name} className={`rounded-xl p-3 border shadow-sm bg-white/70 ${dangling? 'border-red-500 ring-1 ring-red-400': 'border-gray-200'}`}>
-            <div className="flex justify-between text-sm font-mono">
-              <span className="font-semibold">{name}</span>
-              <span className="text-gray-500">{addr}</span>
+          <div key={name} className={`rounded-2xl p-4 border-2 shadow-md bg-white ${dangling? 'border-red-400 ring-2 ring-red-200 bg-red-50': 'border-slate-200 hover:border-slate-300'}`}>
+            <div className="flex justify-between text-base font-mono mb-2">
+              <span className="font-bold text-slate-800">{name}</span>
+              <span className="text-slate-500 font-medium">{addr}</span>
             </div>
-            <div className="mt-1 text-sm font-mono">
-              {!isPtr && <span>value: <span className="font-semibold">{String(v.value)}</span></span>}
+            <div className="text-base font-mono">
+              {!isPtr && <span>value: <span className="font-bold text-slate-800">{String(v.value)}</span></span>}
               {isPtr && (
-                <span>pointer → <span className={`font-semibold ${dangling? 'text-red-600': 'text-blue-700'}`}>
+                <span>pointer → <span className={`font-bold ${dangling? 'text-red-600': 'text-blue-700'}`}>
                   {v.value==='nullptr' ? 'nullptr' : toHex(v.value)}
-                </span>{dangling && <span className="ml-2 text-red-600">(dangling)</span>}</span>
+                </span>{dangling && <span className="ml-2 text-red-600 font-medium">(dangling)</span>}</span>
               )}
             </div>
-            {v.meta?.warning && <div className="mt-1 text-xs text-amber-700">⚠︎ {v.meta.warning}</div>}
+            {v.meta?.warning && <div className="mt-2 text-sm text-amber-700 bg-amber-50 p-2 rounded-lg border border-amber-200">⚠︎ {v.meta.warning}</div>}
           </div>
         )
       })}
@@ -333,31 +333,31 @@ function StackView({stack}){
 
 function HeapView({heap}){
   return (
-    <div className="grid grid-cols-1 gap-2">
-      {heap.length===0 && <div className="text-sm text-gray-500">(no allocations)</div>}
+    <div className="grid grid-cols-1 gap-3">
+      {heap.length===0 && <div className="text-base text-slate-500 text-center py-8 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-300">(no allocations)</div>}
       {heap.map(b=>{
         const addr = toHex(b.addr);
         const freed = b.freed;
         return (
-          <div key={addr} className={`rounded-2xl p-3 border shadow-sm ${freed? 'bg-gray-100 border-gray-300 opacity-75' : 'bg-emerald-50 border-emerald-200'}`}>
-            <div className="flex justify-between text-sm font-mono">
-              <span className="font-semibold">{b.label}</span>
-              <span className="text-gray-600">{addr}</span>
+          <div key={addr} className={`rounded-2xl p-4 border-2 shadow-md ${freed? 'bg-slate-100 border-slate-300 opacity-75' : 'bg-emerald-50 border-emerald-300'}`}>
+            <div className="flex justify-between text-base font-mono mb-2">
+              <span className="font-bold text-slate-800">{b.label}</span>
+              <span className="text-slate-600 font-medium">{addr}</span>
             </div>
-            <div className="mt-1 text-sm font-mono">
+            <div className="mt-2 text-base font-mono">
               {!Array.isArray(b.content) && typeof b.content === 'object' ? (
                 <div className="flex gap-3 flex-wrap">{Object.entries(b.content).map(([k,v])=> (
-                  <div key={k} className="px-2 py-0.5 rounded bg-white border text-gray-800">{k}: {String(v)}</div>
+                  <div key={k} className="px-3 py-1 rounded-lg bg-white border-2 border-slate-200 text-slate-800 font-medium">{k}: {String(v)}</div>
                 ))}</div>
               ) : Array.isArray(b.content) ? (
-                <div className="flex flex-wrap gap-1">{b.content.map((v,i)=> (
-                  <div key={i} className="px-2 py-0.5 rounded bg-white border text-gray-800">[{i}] {String(v)}</div>
+                <div className="flex flex-wrap gap-2">{b.content.map((v,i)=> (
+                  <div key={i} className="px-3 py-1 rounded-lg bg-white border-2 border-slate-200 text-slate-800 font-medium">[{i}] {String(v)}</div>
                 ))}</div>
               ) : (
-                <div className="px-2 py-0.5 rounded bg-white border inline-block">{String(b.content)}</div>
+                <div className="px-3 py-1 rounded-lg bg-white border-2 border-slate-200 inline-block text-slate-800 font-medium">{String(b.content)}</div>
               )}
             </div>
-            {freed && <div className="mt-1 text-xs text-gray-600">(freed)</div>}
+            {freed && <div className="mt-2 text-sm text-slate-600 font-medium bg-slate-200 px-3 py-1 rounded-lg inline-block">(freed)</div>}
           </div>
         )
       })}
@@ -367,11 +367,11 @@ function HeapView({heap}){
 
 function Controls({onBack, onStep, onReset, idx, max}){
   return (
-    <div className="flex items-center gap-2">
-      <button onClick={onBack} disabled={idx<0} className="px-3 py-1.5 rounded-xl border bg-white disabled:opacity-50">← Back</button>
-      <button onClick={onStep} disabled={idx+1>=max} className="px-3 py-1.5 rounded-xl bg-gray-900 text-white disabled:opacity-50">Step →</button>
-      <button onClick={onReset} className="px-3 py-1.5 rounded-xl border bg-white">Reset</button>
-      <div className="ml-2 text-sm">Line <span className="font-semibold">{Math.max(0,idx+1)}</span>/<span>{max}</span></div>
+    <div className="flex items-center gap-3">
+      <button onClick={onBack} disabled={idx<0} className="px-4 py-2 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">← Back</button>
+      <button onClick={onStep} disabled={idx+1>=max} className="px-4 py-2 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">Step →</button>
+      <button onClick={onReset} className="px-4 py-2 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 transition-colors">Reset</button>
+      <div className="ml-3 text-base font-medium text-slate-700">Line <span className="font-bold text-blue-600">{Math.max(0,idx+1)}</span>/<span className="font-bold">{max}</span></div>
     </div>
   );
 }
@@ -399,56 +399,56 @@ function MemoryLabVisualizer(){
   const heap  = currentSnap ? currentSnap.heap  : [];
 
   return (
-    <div className="min-h-full w-full p-6 bg-gradient-to-b from-slate-50 to-slate-100 text-slate-900">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-4">
-          <h1 className="text-2xl font-bold">CSIS3700 Memory Lab — Program Mode</h1>
-          <p className="text-sm text-slate-600">Execute one line at a time; see stack/heap side by side. Final step reveals the one‑sentence conclusion.</p>
+    <div className="min-h-full w-full p-6 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-slate-900">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-8 p-6 bg-white rounded-3xl shadow-lg border-2 border-slate-200">
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">CSIS3700 Memory Lab — Program Mode</h1>
+          <p className="text-base text-slate-600">Execute one line at a time; see stack/heap side by side. Final step reveals the one‑sentence conclusion.</p>
         </header>
 
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <select value={programId} onChange={(e)=>{ setProgramId(e.target.value); reset(); }} className="px-3 py-2 rounded-xl border bg-white">
+        <div className="flex flex-wrap items-center gap-4 mb-8 p-4 bg-white rounded-2xl shadow-md border-2 border-slate-200">
+          <select value={programId} onChange={(e)=>{ setProgramId(e.target.value); reset(); }} className="px-4 py-2 rounded-xl border-2 border-slate-300 bg-white font-medium text-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
             {PROGRAMS.map(p=> <option key={p.id} value={p.id}>{p.name}</option>)}
           </select>
           <Controls onBack={back} onStep={step} onReset={reset} idx={idx} max={max} />
-          <div className="ml-auto text-xs text-slate-600">Shortcuts: 1..9 to switch, ←/→ to step</div>
+          <div className="ml-auto text-sm text-slate-600 font-medium">Shortcuts: 1..9 to switch, ←/→ to step</div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <CodeView lines={program.lines} current={idx} />
 
-          <section className="rounded-2xl bg-white/80 backdrop-blur border p-4 shadow-sm">
-            <div className="flex items-baseline justify-between mb-3">
-              <h2 className="text-lg font-semibold">Stack (simplified)</h2>
-              <div className="text-sm text-slate-500">highest → lowest addresses</div>
+          <section className="rounded-3xl bg-white shadow-lg border-2 border-slate-200 p-6">
+            <div className="flex items-baseline justify-between mb-4 pb-2 border-b-2 border-slate-100">
+              <h2 className="text-xl font-bold text-slate-800">Stack (simplified)</h2>
+              <div className="text-sm text-slate-500 font-medium">highest → lowest addresses</div>
             </div>
             <StackView stack={stack} />
           </section>
         </div>
 
-        <section className="mt-6 rounded-2xl bg-white/80 backdrop-blur border p-4 shadow-sm">
-          <div className="flex items-baseline justify-between mb-3">
-            <h2 className="text-lg font-semibold">Heap (allocations)</h2>
-            <div className="text-sm text-slate-500">green = live, gray = freed</div>
+        <section className="mb-8 rounded-3xl bg-white shadow-lg border-2 border-slate-200 p-6">
+          <div className="flex items-baseline justify-between mb-4 pb-2 border-b-2 border-slate-100">
+            <h2 className="text-xl font-bold text-slate-800">Heap (allocations)</h2>
+            <div className="text-sm text-slate-500 font-medium">green = live, gray = freed</div>
           </div>
           <HeapView heap={heap} />
         </section>
 
-        <section className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl bg-white/80 border p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-1">Question</div>
-            <div className="text-sm text-slate-700">{program.question}</div>
+        <section className="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="rounded-3xl bg-white border-2 border-slate-200 p-6 shadow-lg">
+            <div className="text-base font-bold mb-3 text-slate-800 border-b border-slate-200 pb-2">Question</div>
+            <div className="text-base text-slate-700 leading-relaxed">{program.question}</div>
           </div>
-          <div className={`rounded-2xl border p-4 shadow-sm ${atFinal? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200'}`}>
-            <div className="text-sm font-semibold mb-1">One‑sentence conclusion {atFinal? '' : '(revealed at final step)'}</div>
-            <div className={`text-sm ${atFinal? 'text-emerald-900' : 'text-slate-500'}`}>{atFinal? program.conclusion : '—'}</div>
+          <div className={`rounded-3xl border-2 p-6 shadow-lg ${atFinal? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'}`}>
+            <div className="text-base font-bold mb-3 text-slate-800 border-b border-slate-200 pb-2">One‑sentence conclusion {atFinal? '' : '(revealed at final step)'}</div>
+            <div className={`text-base leading-relaxed ${atFinal? 'text-emerald-900' : 'text-slate-500'}`}>{atFinal? program.conclusion : '—'}</div>
           </div>
         </section>
 
         {currentSnap && (
-          <section className="mt-6 rounded-2xl bg-white/80 border p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-1">{currentSnap.title}</div>
-            <div className="text-sm text-slate-700">{currentSnap.desc}</div>
+          <section className="mb-8 rounded-3xl bg-white border-2 border-slate-200 p-6 shadow-lg">
+            <div className="text-base font-bold mb-3 text-slate-800 border-b border-slate-200 pb-2">{currentSnap.title}</div>
+            <div className="text-base text-slate-700 leading-relaxed">{currentSnap.desc}</div>
           </section>
         )}
       </div>
