@@ -36,15 +36,28 @@ This interactive memory visualizer helps you understand C++ memory management co
 
 ---
 
-<div id="memory-lab-container"></div>
+<div id="memory-lab-container">
+  <div style="padding: 40px; text-align: center; color: #666;">
+    <div style="font-size: 18px; margin-bottom: 10px;">Loading Memory Lab Visualizer...</div>
+    <div style="font-size: 14px;">Please wait while the interactive components load.</div>
+  </div>
+</div>
 
 <!-- Load Tailwind CSS for styling -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Load React and Babel first -->
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!-- Load React and Babel with fallback -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Fallback for React if CDN fails -->
+<script>
+if (typeof React === 'undefined') {
+  document.write('<script src="https://unpkg.com/react@18/umd/react.development.js"><\/script>');
+  document.write('<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"><\/script>');
+}
+</script>
 
 <script type="text/babel">
 const { useState, useRef, useMemo, useEffect } = React;
@@ -456,6 +469,23 @@ function MemoryLabVisualizer(){
   );
 }
 
-// Render the component
-ReactDOM.render(<MemoryLabVisualizer />, document.getElementById('memory-lab-container'));
+// Render the component with error handling
+try {
+  console.log('React version:', React.version);
+  console.log('ReactDOM available:', !!ReactDOM);
+  console.log('Container element:', document.getElementById('memory-lab-container'));
+  
+  if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+    ReactDOM.render(<MemoryLabVisualizer />, document.getElementById('memory-lab-container'));
+    console.log('Memory Lab Visualizer rendered successfully');
+  } else {
+    console.error('React or ReactDOM not available');
+    document.getElementById('memory-lab-container').innerHTML = 
+      '<div style="padding: 20px; text-align: center; color: red;">Error: React libraries not loaded properly. Please refresh the page.</div>';
+  }
+} catch (error) {
+  console.error('Error rendering Memory Lab Visualizer:', error);
+  document.getElementById('memory-lab-container').innerHTML = 
+    '<div style="padding: 20px; text-align: center; color: red;">Error: ' + error.message + '</div>';
+}
 </script>
