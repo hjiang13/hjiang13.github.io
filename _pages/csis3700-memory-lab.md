@@ -96,38 +96,63 @@ class MemoryModel {
 }
 
 // ---------- Program definition helpers ----------
-const prog = (name, lines, exec, introNote="") => ({ id:name, name, lines, exec, introNote });
+// A Program has: id, name, lines, exec(vm, lineIndex), meta: {question, conclusion}
+const prog = (id, name, lines, exec, meta={}) => ({ id, name, lines, exec, ...meta });
+
+// Short Q/A texts per requirement
+const QA = {
+  Q1: {
+    question: "Local variable on the stack: declare int i; print &i; then initialize i=0 and print i and &i. What does this show?",
+    conclusion: "An uninitialized local has an indeterminate value; it lives on the stack and is safe to read only after initialization."
+  },
+  Q2: {
+    question: "new allocates on the heap and delete frees it — what happens to the pointer variable before/after?",
+    conclusion: "new returns a heap address; delete frees the heap block but does not reset the pointer variable — set it to nullptr."
+  },
+  Q3: {
+    question: "Dynamic array with new[]: are a[i] and *(a+i) equivalent, and how should it be freed?",
+    conclusion: "A dynamic array is contiguous; a[i] ≡ *(a+i); arrays must be freed with delete[]."
+  },
+  Q4: {
+    question: "Dynamic object: confirm (*p).member ≡ p->member; what must be done after delete?",
+    conclusion: "(*p).member and p->member are equivalent; after delete, null the pointer to avoid dangling."
+  },
+  Q5A: {
+    question: "Ten points with the same coordinates as independent objects: do changes propagate? How to free?",
+    conclusion: "Same values, different objects → different addresses; changes don't propagate; delete each and then null pointers."
+  },
+  Q5B: {
+    question: "Ten pointers aliasing the same object: do changes propagate? What happens after a single delete?",
+    conclusion: "All pointers share one address; any change is seen by all; after delete they all dangle and must be nulled."
+  },
+  Q6: {
+    question: "In an aliasing scenario, what exactly does delete remove, and what remains?",
+    conclusion: "Delete frees only the heap block; aliasing pointer variables retain the old address (dangling) until you clear them."
+  },
+  Q7: {
+    question: "Pointer parameter passed by value vs. modifying through the pointer — which affects the caller?",
+    conclusion: "Reassigning the parameter doesn't change the caller's binding; dereferencing modifies the caller's object; beware leaks."
+  },
+  Q8: {
+    question: "Pointer-by-reference (int*&): can a function change the caller's pointer to a new allocation?",
+    conclusion: "Passing a pointer by reference (T*&) or returning a pointer changes the caller's binding; remember delete[]."
+  }
+};
 
 // ----- Q1 -----
 const Q1 = prog(
-  'Q1 Local variable (stack)',
-  [
-    'int i;',
-    'i = 0;',
-  ],
+  'Q1','Q1 Local variable (stack)',
+  [ 'int i;', 'i = 0;' ],
   (vm, i) => {
-    if(i===0){
-      vm.allocStack('i','int','(uninitialized)',{warning:'Do not read before init (UB).'});
-      vm.snapshot('Q1 • int i;','Local variable on the stack (uninitialized).');
-    }
-    if(i===1){
-      vm.setStack('i',0);
-      vm.snapshot('Q1 • i = 0;','After initialization we can safely read i.');
-    }
-  }
+    if(i===0){ vm.allocStack('i','int','(uninitialized)',{warning:'Do not read before init (UB).'}); vm.snapshot('Q1 • int i;','Local variable on the stack (uninitialized).'); }
+    if(i===1){ vm.setStack('i',0); vm.snapshot('Q1 • i = 0;','After initialization we can safely read i.'); }
+  }, QA.Q1
 );
 
 // ----- Q2 -----
 const Q2 = prog(
-  'Q2 new/delete (heap int)',
-  [
-    'int* p1;',
-    'p1 = nullptr;',
-    'p1 = new int;',
-    '*p1 = 20;',
-    'delete p1;',
-    'p1 = nullptr;',
-  ],
+  'Q2','Q2 new/delete (heap int)',
+  [ 'int* p1;', 'p1 = nullptr;', 'p1 = new int;', '*p1 = 20;', 'delete p1;', 'p1 = nullptr;' ],
   (vm, i) => {
     if(i===0){ vm.allocStack('p1','pointer','(indeterminate)'); vm.snapshot('Q2 • int* p1;','Uninitialized pointer (do not dereference).'); }
     if(i===1){ vm.setStack('p1','nullptr'); vm.snapshot('Q2 • p1 = nullptr;','Safe null pointer.'); }
@@ -135,50 +160,38 @@ const Q2 = prog(
     if(i===3){ const h = vm.stack['p1'].value; vm.findHeap(h).content = 20; vm.snapshot('Q2 • *p1 = 20;','Write through pointer.'); }
     if(i===4){ const h = vm.stack['p1'].value; vm.freeHeap(h); vm.snapshot('Q2 • delete p1;','Heap freed; p1 still holds old address → dangling.'); }
     if(i===5){ vm.setStack('p1','nullptr'); vm.snapshot('Q2 • p1 = nullptr;','Now safe.'); }
-  }
+  }, QA.Q2
 );
 
 // ----- Q3 -----
 const Q3 = prog(
-  'Q3 new[] array',
-  [
-    'int* a;',
-    'a = new int[4]{0,0,0,0};',
-    'a[2] = 20;',
-    'delete[] a;',
-    'a = nullptr;',
-  ],
+  'Q3','Q3 new[] array',
+  [ 'int* a;', 'a = new int[4]{0,0,0,0};', 'a[2] = 20;', 'delete[] a;', 'a = nullptr;' ],
   (vm, i) => {
     if(i===0){ vm.allocStack('a','pointer','(indeterminate)'); vm.snapshot('Q3 • int* a;','Pointer for dynamic array.'); }
     if(i===1){ const base = vm.allocHeap('int[4]',[0,0,0,0],4); vm.setStack('a',base); vm.snapshot('Q3 • a = new int[4]{0,0,0,0};','a points to first element; block is contiguous.'); }
     if(i===2){ const base = vm.stack['a'].value; vm.findHeap(base).content[2] = 20; vm.snapshot('Q3 • a[2] = 20;','Indexing writes to the 3rd slot.'); }
     if(i===3){ const base = vm.stack['a'].value; vm.freeHeap(base); vm.snapshot('Q3 • delete[] a;','Array freed; a dangling.'); }
     if(i===4){ vm.setStack('a','nullptr'); vm.snapshot('Q3 • a = nullptr;','Now safe.'); }
-  }
+  }, QA.Q3
 );
 
 // ----- Q4 -----
 const Q4 = prog(
-  'Q4 new Point / ->',
-  [
-    'Point* p;',
-    'p = new Point{1.0, 2.0};',
-    '(*p).x; p->y;',
-    'delete p;',
-    'p = nullptr;',
-  ],
+  'Q4','Q4 new Point / ->',
+  [ 'Point* p;', 'p = new Point{1.0, 2.0};', '(*p).x; p->y;', 'delete p;', 'p = nullptr;' ],
   (vm, i) => {
     if(i===0){ vm.allocStack('p','pointer','(indeterminate)'); vm.snapshot('Q4 • Point* p;','Pointer to object.'); }
     if(i===1){ const addr = vm.allocHeap('Point',{x:1.0,y:2.0}); vm.setStack('p',addr); vm.snapshot('Q4 • p = new Point{1.0,2.0};','Heap object with x=1.0, y=2.0.'); }
     if(i===2){ vm.snapshot('Q4 • (*p).x; p->y;','Both syntaxes access the same object members.'); }
     if(i===3){ const addr = vm.stack['p'].value; vm.freeHeap(addr); vm.snapshot('Q4 • delete p;','Object freed; p dangling.'); }
     if(i===4){ vm.setStack('p','nullptr'); vm.snapshot('Q4 • p = nullptr;','Now safe.'); }
-  }
+  }, QA.Q4
 );
 
 // ----- Q5A -----
 const Q5A = prog(
-  'Q5A Ten points (independent)',
+  'Q5A','Q5A Ten points (independent)',
   [
     'Point* arrA[10];',
     ...Array.from({length:10},(_,i)=>`arrA[${i}] = new Point{1.0, 2.0};`),
@@ -188,18 +201,16 @@ const Q5A = prog(
   ],
   (vm, i) => {
     if(i===0){ vm.snapshot('Q5A • Point* arrA[10];','Ten pointers to independent Points.'); return; }
-    if(i>=1 && i<=10){
-      const k = i-1; const addr = vm.allocHeap('Point',{x:1.0,y:2.0}); vm.allocStack(`arrA[${k}]`,'pointer',addr); vm.snapshot(`Q5A • arrA[${k}] = new Point{1.0,2.0};`,'Different addresses for each element.'); return;
-    }
+    if(i>=1 && i<=10){ const k = i-1; const addr = vm.allocHeap('Point',{x:1.0,y:2.0}); vm.allocStack(`arrA[${k}]`,'pointer',addr); vm.snapshot(`Q5A • arrA[${k}] = new Point{1.0,2.0};`,'Different addresses for each element.'); return; }
     if(i===11){ const a0 = vm.stack['arrA[0]'].value; vm.findHeap(a0).content.x = 100.0; vm.snapshot('Q5A • arrA[0]->x = 100;','Only arrA[0] changes.'); return; }
     if(i>=12 && i<=21){ const k=i-12; const addr = vm.stack[`arrA[${k}]`].value; vm.freeHeap(addr); vm.snapshot(`Q5A • delete arrA[${k}];`,'Freed one object.'); return; }
     if(i>=22 && i<=31){ const k=i-22; vm.setStack(`arrA[${k}]`,'nullptr'); vm.snapshot(`Q5A • arrA[${k}] = nullptr;`,'Pointer cleared.'); return; }
-  }
+  }, QA.Q5A
 );
 
 // ----- Q5B -----
 const Q5B = prog(
-  'Q5B Ten pointers (aliasing one object)',
+  'Q5B','Q5B Ten pointers (aliasing one object)',
   [
     'Point* shared = new Point{1.0, 2.0};',
     ...Array.from({length:10},(_,i)=>`arrB[${i}] = shared;`),
@@ -213,21 +224,13 @@ const Q5B = prog(
     if(i===11){ const addr = vm.stack['shared'].value; vm.findHeap(addr).content.x = 200.0; vm.snapshot('Q5B • arrB[3]->x = 200;','All aliases observe x=200.'); return; }
     if(i===12){ const addr = vm.stack['shared'].value; vm.freeHeap(addr); vm.snapshot('Q5B • delete shared;','Object freed; all arrB pointers now dangling.'); return; }
     if(i>=13 && i<=22){ const k=i-13; vm.setStack(`arrB[${k}]`,'nullptr'); vm.snapshot(`Q5B • arrB[${k}] = nullptr;`,'Pointer cleared.'); return; }
-  }
+  }, QA.Q5B
 );
 
 // ----- Q6 -----
 const Q6 = prog(
-  'Q6 delete & dangling (aliases)',
-  [
-    'Point* alias[3];',
-    'shared = new Point{3.0,3.0};',
-    'alias[0] = shared;',
-    'alias[1] = shared;',
-    'alias[2] = shared;',
-    'delete shared;',
-    'alias[0] = alias[1] = alias[2] = nullptr;',
-  ],
+  'Q6','Q6 delete & dangling (aliases)',
+  [ 'Point* alias[3];', 'shared = new Point{3.0,3.0};', 'alias[0] = shared;', 'alias[1] = shared;', 'alias[2] = shared;', 'delete shared;', 'alias[0] = alias[1] = alias[2] = nullptr;' ],
   (vm, i) => {
     if(i===0){ vm.snapshot('Q6 • alias[3]','Three alias pointers.'); }
     if(i===1){ const a = vm.allocHeap('Point',{x:3.0,y:3.0}); vm.allocStack('shared','pointer',a); vm.snapshot('Q6 • shared = new Point{3.0,3.0};'); }
@@ -236,43 +239,32 @@ const Q6 = prog(
     if(i===4){ vm.allocStack('alias[2]','pointer', vm.stack['shared'].value); vm.snapshot('Q6 • alias[2] = shared;'); }
     if(i===5){ const addr = vm.stack['shared'].value; vm.freeHeap(addr); vm.snapshot('Q6 • delete shared;','Aliases are now dangling.'); }
     if(i===6){ vm.setStack('alias[0]','nullptr'); vm.setStack('alias[1]','nullptr'); vm.setStack('alias[2]','nullptr'); vm.snapshot('Q6 • null all aliases','Cleared.'); }
-  }
+  }, QA.Q6
 );
 
 // ----- Q7 -----
 const Q7 = prog(
-  'Q7 pointer parameter (pass-by-value)',
-  [
-    'int* p = new int(80);',
-    'reassign_param(p); // q = new int(42);',
-    'set_through_pointer(p); // *p = 42;',
-    'delete p;',
-    'p = nullptr;',
-  ],
+  'Q7','Q7 pointer parameter (pass-by-value)',
+  [ 'int* p = new int(80);', 'reassign_param(p); // q = new int(42);', 'set_through_pointer(p); // *p = 42;', 'delete p;', 'p = nullptr;' ],
   (vm, i) => {
     if(i===0){ const a = vm.allocHeap('int',80); vm.allocStack('p','pointer',a); vm.snapshot('Q7 • int* p = new int(80);'); }
     if(i===1){ /* reassign_param copies pointer and rebinds the copy */ vm.allocHeap('int',42); vm.snapshot('Q7 • reassign_param(p)','Parameter reassigned internally; caller p unchanged.'); }
     if(i===2){ const a = vm.stack['p'].value; vm.findHeap(a).content = 42; vm.snapshot('Q7 • set_through_pointer(p)','The object pointed by p is modified to 42.'); }
     if(i===3){ const a = vm.stack['p'].value; vm.freeHeap(a); vm.snapshot('Q7 • delete p','Freed; p dangling.'); }
     if(i===4){ vm.setStack('p','nullptr'); vm.snapshot('Q7 • p = nullptr','Safe.'); }
-  }
+  }, QA.Q7
 );
 
 // ----- Q8 -----
 const Q8 = prog(
-  'Q8 int*& allocate (change caller pointer)',
-  [
-    'int* ages = nullptr;',
-    'allocate_int_array(ages, 5);',
-    'delete[] ages;',
-    'ages = nullptr;',
-  ],
+  'Q8','Q8 int*& allocate (change caller pointer)',
+  [ 'int* ages = nullptr;', 'allocate_int_array(ages, 5);', 'delete[] ages;', 'ages = nullptr;' ],
   (vm, i) => {
     if(i===0){ vm.allocStack('ages','pointer','nullptr'); vm.snapshot('Q8 • int* ages = nullptr;'); }
     if(i===1){ const arr = vm.allocHeap('int[n]',[0,0,0,0,0],5); vm.setStack('ages',arr); vm.snapshot('Q8 • allocate_int_array(ages,5)','Pointer-by-reference changes caller binding.'); }
     if(i===2){ const arr = vm.stack['ages'].value; vm.freeHeap(arr); vm.snapshot('Q8 • delete[] ages;','Freed; ages dangling.'); }
     if(i===3){ vm.setStack('ages','nullptr'); vm.snapshot('Q8 • ages = nullptr;','Safe.'); }
-  }
+  }, QA.Q8
 );
 
 const PROGRAMS = [Q1,Q2,Q3,Q4,Q5A,Q5B,Q6,Q7,Q8];
@@ -282,29 +274,20 @@ function useProgram(id){
   const program = useMemo(()=> PROGRAMS.find(p=>p.id===id) || PROGRAMS[0], [id]);
   const vmRef = useRef(new MemoryModel());
   const [idx, setIdx] = useState(-1); // -1 means before first line
-  const [snapCount, setSnapCount] = useState(0);
-
-  const reset = ()=>{ vmRef.current = new MemoryModel(); setIdx(-1); setSnapCount(0); };
-  const step = ()=>{
-    if(idx+1 >= program.lines.length) return;
-    const vm = vmRef.current;
-    const next = idx+1;
-    program.exec(vm, next);
-    setIdx(next);
-    setSnapCount(vm.snapshots.length);
-  };
+  const reset = ()=>{ vmRef.current = new MemoryModel(); setIdx(-1); };
+  const step = ()=>{ if(idx+1 < program.lines.length){ const vm = vmRef.current; const next = idx+1; program.exec(vm, next); setIdx(next); } };
   const back = ()=>{ if(idx>=0) setIdx(idx-1); };
-
   const snapshots = vmRef.current.snapshots;
   const currentSnap = (idx>=0 && idx < snapshots.length) ? snapshots[idx] : null;
-  return { program, idx, step, back, reset, currentSnap, snapshots };
+  const atFinal = idx+1 === program.lines.length;
+  return { program, idx, step, back, reset, currentSnap, atFinal };
 }
 
 // ---------- UI components ----------
 function CodeView({lines, current}){
   return (
     <div className="rounded-2xl border bg-white/90 shadow-sm overflow-hidden">
-      <div className="px-3 py-2 text-xs text-slate-600 border-b bg-slate-50">Code (executing one line at a time)</div>
+      <div className="px-3 py-2 text-xs text-slate-600 border-b bg-slate-50">Code (execute one line at a time)</div>
       <pre className="m-0 p-3 text-sm leading-6 font-mono whitespace-pre-wrap">
         {lines.map((ln,i)=> (
           <div key={i} className={`flex gap-3 ${i===current? 'bg-yellow-100' : ''}`}>
@@ -356,7 +339,7 @@ function HeapView({heap}){
         const addr = toHex(b.addr);
         const freed = b.freed;
         return (
-          <div key={addr} className={`rounded-xl p-3 border shadow-sm ${freed? 'bg-gray-100 border-gray-300 opacity-75' : 'bg-emerald-50 border-emerald-200'}`}>
+          <div key={addr} className={`rounded-2xl p-3 border shadow-sm ${freed? 'bg-gray-100 border-gray-300 opacity-75' : 'bg-emerald-50 border-emerald-200'}`}>
             <div className="flex justify-between text-sm font-mono">
               <span className="font-semibold">{b.label}</span>
               <span className="text-gray-600">{addr}</span>
@@ -394,17 +377,17 @@ function Controls({onBack, onStep, onReset, idx, max}){
 }
 
 function MemoryLabVisualizer(){
-  const [programId, setProgramId] = useState(PROGRAMS[1].id); // default Q2
-  const { program, idx, step, back, reset, currentSnap } = useProgram(programId);
+  const [programId, setProgramId] = useState('Q2'); // default Q2
+  const { program, idx, step, back, reset, currentSnap, atFinal } = useProgram(programId);
 
   // keyboard shortcuts
   useEffect(()=>{
     const onKey = (e)=>{
       if(e.key==='ArrowRight') step();
       if(e.key==='ArrowLeft') back();
-      const map = ['Q1','Q2','Q3','Q4','Q5A','Q5B','Q6','Q7','Q8'];
+      const order = ['Q1','Q2','Q3','Q4','Q5A','Q5B','Q6','Q7','Q8'];
       if(/^[1-9]$/.test(e.key)){
-        const k = parseInt(e.key,10)-1; const id = PROGRAMS[k]?.id; if(id){ setProgramId(id); reset(); }
+        const k = parseInt(e.key,10)-1; const id = order[k]; if(id){ setProgramId(id); reset(); }
       }
     };
     window.addEventListener('keydown', onKey);
@@ -420,7 +403,7 @@ function MemoryLabVisualizer(){
       <div className="max-w-6xl mx-auto">
         <header className="mb-4">
           <h1 className="text-2xl font-bold">CSIS3700 Memory Lab — Program Mode</h1>
-          <p className="text-sm text-slate-600">View the entire code and execute one line at a time.</p>
+          <p className="text-sm text-slate-600">Execute one line at a time; see stack/heap side by side. Final step reveals the one‑sentence conclusion.</p>
         </header>
 
         <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -428,7 +411,7 @@ function MemoryLabVisualizer(){
             {PROGRAMS.map(p=> <option key={p.id} value={p.id}>{p.name}</option>)}
           </select>
           <Controls onBack={back} onStep={step} onReset={reset} idx={idx} max={max} />
-          <div className="ml-auto text-xs text-slate-600">Shortcuts: 1..8 to switch, ←/→ to step</div>
+          <div className="ml-auto text-xs text-slate-600">Shortcuts: 1..9 to switch, ←/→ to step</div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -449,6 +432,17 @@ function MemoryLabVisualizer(){
             <div className="text-sm text-slate-500">green = live, gray = freed</div>
           </div>
           <HeapView heap={heap} />
+        </section>
+
+        <section className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="rounded-2xl bg-white/80 border p-4 shadow-sm">
+            <div className="text-sm font-semibold mb-1">Question</div>
+            <div className="text-sm text-slate-700">{program.question}</div>
+          </div>
+          <div className={`rounded-2xl border p-4 shadow-sm ${atFinal? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200'}`}>
+            <div className="text-sm font-semibold mb-1">One‑sentence conclusion {atFinal? '' : '(revealed at final step)'}</div>
+            <div className={`text-sm ${atFinal? 'text-emerald-900' : 'text-slate-500'}`}>{atFinal? program.conclusion : '—'}</div>
+          </div>
         </section>
 
         {currentSnap && (
