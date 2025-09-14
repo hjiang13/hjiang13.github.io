@@ -6,37 +6,45 @@ author_profile: true
 
 # CSIS 3700 Memory Lab Visualizer
 
-这个交互式内存可视化器帮助您理解 C++ 中的内存管理概念，包括栈、堆、指针和动态内存分配。
+This interactive memory visualizer helps you understand C++ memory management concepts, including stack, heap, pointers, and dynamic memory allocation.
 
-## 功能特点
+## Features
 
-- **逐步执行**：逐行执行代码，观察内存状态变化
-- **可视化展示**：直观显示栈和堆的内存分配
-- **多种场景**：涵盖从基础变量到复杂指针操作的8个不同场景
-- **交互控制**：支持前进、后退、重置等操作
+- **Step-by-step execution**: Execute code line by line and observe memory state changes
+- **Visual representation**: Intuitive display of stack and heap memory allocations
+- **Multiple scenarios**: 8 different scenarios covering from basic variables to complex pointer operations
+- **Interactive controls**: Support for forward, backward, and reset operations
 
-## 使用方法
+## How to Use
 
-1. 选择不同的程序场景（Q1-Q8）
-2. 使用"Step"按钮逐步执行代码
-3. 观察栈和堆中内存的变化
-4. 使用键盘快捷键：←/→ 控制步骤，1-8 切换程序
+1. Select different program scenarios (Q1-Q8)
+2. Use the "Step" button to execute code line by line
+3. Observe memory changes in stack and heap
+4. Use keyboard shortcuts: ←/→ to control steps, 1-8 to switch programs
 
-## 程序场景
+## Program Scenarios
 
-- **Q1**: 局部变量（栈）
-- **Q2**: new/delete（堆整数）
-- **Q3**: new[] 数组
-- **Q4**: new Point 对象
-- **Q5A**: 十个独立点对象
-- **Q5B**: 十个指针指向同一对象
-- **Q6**: 删除和悬空指针（别名）
-- **Q7**: 指针参数（按值传递）
-- **Q8**: int*& 分配（改变调用者指针）
+- **Q1**: Local variables (stack)
+- **Q2**: new/delete (heap integer)
+- **Q3**: new[] array
+- **Q4**: new Point object
+- **Q5A**: Ten independent point objects
+- **Q5B**: Ten pointers pointing to the same object
+- **Q6**: Delete and dangling pointers (aliases)
+- **Q7**: Pointer parameters (pass-by-value)
+- **Q8**: int*& allocation (change caller pointer)
 
 ---
 
 <div id="memory-lab-container"></div>
+
+<!-- Load Tailwind CSS for styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Load React and Babel first -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
 const { useState, useRef, useMemo, useEffect } = React;
@@ -457,7 +465,3 @@ function MemoryLabVisualizer(){
 // Render the component
 ReactDOM.render(<MemoryLabVisualizer />, document.getElementById('memory-lab-container'));
 </script>
-
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
