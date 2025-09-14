@@ -27,10 +27,20 @@
         </div>
     </div>
 
-    <!-- Load React and Babel -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Load React and Babel with reliable CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Ensure scripts are loaded before execution -->
+    <script>
+      window.addEventListener('load', function() {
+        console.log('Page loaded, checking React availability...');
+        console.log('React available:', typeof React !== 'undefined');
+        console.log('ReactDOM available:', typeof ReactDOM !== 'undefined');
+        console.log('Babel available:', typeof Babel !== 'undefined');
+      });
+    </script>
 
     <script type="text/babel">
         const { useState, useRef, useMemo, useEffect } = React;
@@ -441,25 +451,29 @@
           );
         }
 
-        // Render the component with error handling
-        try {
-          console.log('React version:', React.version);
-          console.log('ReactDOM available:', !!ReactDOM);
-          console.log('Container element:', document.getElementById('memory-lab-container'));
-          
+        // Wait for React to be available, then render
+        function waitForReact() {
           if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
-            ReactDOM.render(<MemoryLabVisualizer />, document.getElementById('memory-lab-container'));
-            console.log('Memory Lab Visualizer rendered successfully');
+            console.log('React version:', React.version);
+            console.log('ReactDOM available:', !!ReactDOM);
+            console.log('Container element:', document.getElementById('memory-lab-container'));
+            
+            try {
+              ReactDOM.render(<MemoryLabVisualizer />, document.getElementById('memory-lab-container'));
+              console.log('Memory Lab Visualizer rendered successfully');
+            } catch (error) {
+              console.error('Error rendering Memory Lab Visualizer:', error);
+              document.getElementById('memory-lab-container').innerHTML = 
+                '<div style="padding: 20px; text-align: center; color: red;">Error: ' + error.message + '</div>';
+            }
           } else {
-            console.error('React or ReactDOM not available');
-            document.getElementById('memory-lab-container').innerHTML = 
-              '<div style="padding: 20px; text-align: center; color: red;">Error: React libraries not loaded properly. Please refresh the page.</div>';
+            console.log('React not ready yet, waiting...');
+            setTimeout(waitForReact, 100);
           }
-        } catch (error) {
-          console.error('Error rendering Memory Lab Visualizer:', error);
-          document.getElementById('memory-lab-container').innerHTML = 
-            '<div style="padding: 20px; text-align: center; color: red;">Error: ' + error.message + '</div>';
         }
+        
+        // Start waiting for React
+        waitForReact();
     </script>
 </body>
 </html>
